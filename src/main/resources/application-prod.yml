@@ -1,17 +1,12 @@
-
 server:
-  port: 3000
+  port: 3001
 
 spring:
-  # 프로필 설정
-  profiles:
-    active: dev
-
-  # 데이터베이스 설정
+  # 데이터 베이스 연결 설정
   datasource:
     driverClassName: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@localhost:1521:orcl
-    username: PROJECT
+    username: PROJECT_REACT
     password: _aA123456
 
   # JPA 설정
@@ -27,35 +22,6 @@ spring:
     hibernate:
       ddlAuto: create
 
-  # 파일 업로드 설정
-  servlet:
-    multipart:
-      maxFileSize: 20MB
-      maxRequestSize: 40MB
-
-  # 정적 자원 설정(CSS, JS, 이미지)
-  resources:
-    staticLocations: file:src/main/resources/static/
-
-  # 라이브 리로드 설정
-  devtools:
-    livereload:
-      enabled: true
-
-  # 타임리프 설정
-  thymeleaf:
-    cache: false
-    prefix: file:src/main/resources/templates/
-
-  flyway:
-    enabled: true
-
-file:
-  upload:
-    path: C:/uploads/
-    url: /uploads/
-
-# 로거 설정
 logging:
   level:
     org:
@@ -63,3 +29,9 @@ logging:
         type:
           descriptor:
             sql: trace
+
+# JSON WebToken 설정
+jwt:
+  header: Authorization
+  secret: YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd6eXoxMjMxMjMxMjMxMjMxMjMxMzEyMzEyMzEzMTIzMTIzMTIzMTMxMjMxMzEzMTMxMjM # base64 인코딩
+  accessTokenValidityInSeconds: 3600 # 60 min

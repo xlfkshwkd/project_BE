@@ -1,16 +1,11 @@
-
 server:
-  port: 3000
+  port: 3001
 
 spring:
-  # ??? ??
-  profiles:
-    active: dev
-
-  # ?????? ??
+  # ??? ??? ?? ??
   datasource:
     driverClassName: oracle.jdbc.driver.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:xe
+    url: jdbc:oracle:thin:@localhost:1521:orcl
     username: PROJECT_REACT
     password: _aA123456
 
@@ -27,35 +22,6 @@ spring:
     hibernate:
       ddlAuto: create
 
-  # ?? ??? ??
-  servlet:
-    multipart:
-      maxFileSize: 20MB
-      maxRequestSize: 40MB
-
-  # ?? ?? ??(CSS, JS, ???)
-  resources:
-    staticLocations: file:src/main/resources/static/
-
-  # ??? ??? ??
-  devtools:
-    livereload:
-      enabled: true
-
-  # ???? ??
-  thymeleaf:
-    cache: false
-    prefix: file:src/main/resources/templates/
-
-  flyway:
-    enabled: true
-
-file:
-  upload:
-    path: C:/uploads/
-    url: /uploads/
-
-# ?? ??
 logging:
   level:
     org:
@@ -64,8 +30,8 @@ logging:
           descriptor:
             sql: trace
 
+# JSON WebToken ??
 jwt:
   header: Authorization
-  secret:
-    YXNkYXNkYXNkYXNkYWQ
-
+  secret: YWJjZGVmZ2hpamtsbW5vcHFyc3R1dnd6eXoxMjMxMjMxMjMxMjMxMjMxMzEyMzEyMzEzMTIzMTIzMTIzMTMxMjMxMzEzMTMxMjM # base64 ???
+  accessTokenValidityInSeconds: 3600 # 60 min
