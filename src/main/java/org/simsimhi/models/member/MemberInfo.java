@@ -2,10 +2,10 @@ package org.simsimhi.models.member;
 
 import lombok.Builder;
 import lombok.Data;
+import org.simsimhi.entities.Member;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.lang.reflect.Member;
 import java.util.Collection;
 
 @Data
