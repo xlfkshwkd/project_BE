@@ -24,28 +24,26 @@ public class Utils {
         }
     }
 
-    public static List<String> getMessages(Errors errors) {
-        return errors.getFieldErrors()
-                .stream()
-                .flatMap(f -> Arrays.stream(f.getCodes()).sorted(Comparator.reverseOrder())
-                        .map(c -> getMessage(c, "validation")))
-                .filter(s -> s != null && !s.isBlank()).toList();
-    }
 
-    public Map<String ,List <String>>getMessages(Errors errors,String bundleType){
-        bundleType =Objects.requireNonNullElse(bundleType,"validation");
-        ResourceBundle bundle =bundleType.equals("error")?errorsBundle:validationsBundle;
+    public static Map<String, List<String>> getMessages(Errors errors) {
+        try {
+            Map<String, List<String>> data = new HashMap<>();
+            for (FieldError error : errors.getFieldErrors()) {
+                String field = error.getField();
+                List<String> messages = Arrays.stream(error.getCodes()).sorted(Comparator.reverseOrder())
+                        .map(c -> getMessage(c, "validation"))
+                        .filter(c -> c != null)
+                        .toList();
 
-        Map<String,List<String>>data =new HashMap<>();
-        for(FieldError error :errors.getFieldErrors()){
-            String field =error.getField();
-          List<String> messages = Arrays.stream(error.getCodes()).sorted(Comparator.reverseOrder())
-                    .map(c->getMessage(c, "validation"))
-                    .filter(c ->c !=null)
-                    .toList();
-                    //NotBlank email
-            data.put(field,messages);
+                data.put(field, messages);
+            }
+
+            return data;
+
+        } catch (Exception e) {
+            return null;
         }
-        return data;
+
+
     }
 }
